@@ -1,0 +1,31 @@
+{% extends 'writeups/layout.html' %}
+
+{% block content %}
+
+    <h2 class="title mt-4"> {{ post.title }} </h2>
+    <b class="author"> {{ post.author }} </b> <br/>
+    <small class="date"> {{ post.posted_on|date:"F d, Y" }} </small>
+
+    <p></p>
+
+    <div id="like_section">
+      {% include 'writeups/like_section.html' %}
+    </div>
+
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button btn btn-outline-info mb-3 mt-3" data-via="budheswarbaghel" data-hashtags="HackTheBox" data-related="hackthebox_eu" data-show-count="false">Tweet</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <br/>
+
+    <p class="description"> {{ post.description }} </p>
+
+    <img class="mt-4 mb-4" src="{{ post.thumbnail.url }}"></img>
+    <p> {{ post.content|safe }} </p>
+
+    <hr/>
+
+    <div class="comments-section container">
+      {% include 'writeups/comments.html' %}
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,100 @@
+{% extends 'writeups/layout.html' %}
+
+{% block content %}
+
+<h1 class="mt-4"> Blogs </h1>
+<hr class="my-4">
+
+<div class="row container-fluid">
+
+    {% for post in page %}
+
+    <div class="card border-dark mb-3 w-100">
+        <div class="card-header">{{ post.posted_on|date:"F d, Y" }}</div>
+        <div class="card-body text-secondary">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.description }}</p>
+
+            {% for tag in post.tags.all %}
+                {% with forloop.counter as color %}
+
+                <span class="badge badge-{{ colors.0 }}">{{ tag }}</span>
+
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="mt-4 d-flex justify-content-center">
+  <ul class="pagination">
+
+    {% if page.has_previous %}
+
+        <li class="page-item">
+        <a class="page-link" href="?page=1"> &laquo; </a>
+        </li>
+
+        <li class="page-item">
+        <a class="page-link" href="?page={{ page.previous_page_number }}"> &lsaquo; </a>
+        </li>
+
+    {% else %}
+
+        <li class="page-item disabled">
+        <a class="page-link" href="#"> &laquo; </a>
+        </li>
+
+        <li class="page-item disabled">
+        <a class="page-link" href="#"> &lsaquo; </a>
+        </li>
+
+    {% endif %}
+
+    {% for num in page.paginator.page_range %}
+
+        {% if page.number == num %}
+
+        <li class="page-item active">
+        <a class="page-link" href="?page={{ num }}"> {{ num }} </a>
+        </li>
+
+        {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+
+        <li class="page-item">
+        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% if page.has_next %}
+
+        <li class="page-item">
+        <a class="page-link" href="?page={{ page.next_page_number }}"> &rsaquo; </a>
+        </li>
+
+        <li class="page-item">
+        <a class="page-link" href="?page={{ page.paginator.num_pages }}"> &raquo; </a>
+        </li>
+
+    {% else %}
+
+        <li class="page-item disabled">
+        <a class="page-link" href="#"> &rsaquo; </a>
+        </li>
+
+        <li class="page-item disabled">
+        <a class="page-link" href="#"> &raquo; </a>
+        </li>
+
+    {% endif %}
+
+  </ul>
+</div>
+
+{% endblock content %}

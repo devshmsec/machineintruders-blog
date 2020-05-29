@@ -1,0 +1,27 @@
+{% extends 'writeups/layout.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-3">
+
+    <img class="profile_picture mr-3" src="{{ user.profile.photo.url }}"></img>
+    <h2> {{ user.first_name }} {{ user.last_name }} </h2>
+    <small class="username"> @{{ user.username }} </small><br/>
+    
+    <span class="badge badge-warning mb-4">Email is not verified</span>
+
+    <p class="manage">
+        <a href="#"> Manage </a> your profile here.
+    </p>
+
+</div>
+
+<hr class="my-4">
+
+<div class="container-fluid">
+
+    <h2>Recently Activities</h2>
+
+</div>
+
+{% endblock content %}

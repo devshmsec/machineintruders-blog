@@ -1,0 +1,99 @@
+{% load crispy_forms_tags %}
+
+<h3 class="header">{{ comments.count }} Comment{{ comments|pluralize }} </h3>
+
+{% for comment in comments %}
+
+<div class="comment">
+
+    <a class="avatar">
+    <img class="comment-pic mt-3" src="{{ comment.user.profile.photo.url }}" alt="{{ comment.user }}">
+    </a>
+
+    <div class="content">
+
+        <span class="author">{{ comment.user.first_name|capfirst }} {{ comment.user.last_name|capfirst }}</span><br/>
+        <span class="comment-username"> @ {{ comment.user.username }} </span><br/>
+        <small class="date">{{ comment.time|date:"F d, Y" }}</small>
+
+        <br/>
+        <p>
+            <div class="text">{{ comment.text }}</div>
+        </p>
+        <br/>
+
+        <div class="options">
+            <button type="button" class="btn btn-outline-dark btn-sm" value="show" onclick="showhidereply(this)">Reply</button>
+            &nbsp;
+            <!--
+            <a class="edit">Edit</a> &nbsp;
+            <a class="delete">Delete</a>
+            -->
+        </div>
+
+        <div id="reply-id" class="reply-comments" style="display: none">
+
+            <form class="form" method='POST'>
+            {% csrf_token %}
+            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+
+                {{ comment_form|crispy }}
+                <button type="submit" class="btn btn-outline-secondary mt-2 mb-4">Reply</button>
+
+            </form>
+        </div>
+    </div>
+
+    {% for reply in comment.replies.all %}
+
+        <div class="replies">
+
+            <a class="avatar">
+            <img class="comment-pic mt-3" src="{{ reply.user.profile.photo.url }}" alt="{{ reply.user }}">
+            </a>
+
+            <div class="content">
+
+                <span class="author">{{ reply.user.first_name|capfirst }} {{ reply.user.last_name|capfirst }}</span><br/>
+                <span class="comment-username"> @ {{ reply.user.username }} </span><br/>
+                <small class="date">{{ reply.time|date:"F d, Y" }}</small>
+
+                <br/>
+                <p>
+                    <div class="text">{{ reply.text }}</div>
+                </p>
+                <br/>
+
+                <div class="options">
+                    <button type="button" class="btn btn-outline-dark btn-sm" value="show" onclick="showhidereply(this)">Reply</button>
+                </div>
+
+                <div id="reply-id" class="reply-comments" style="display: none">
+
+                    <form class="form" method='POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_id" value="{{ reply.id }}">
+
+                        {{ comment_form|crispy }}
+                        <button type="submit" class="btn btn-outline-secondary mt-2 mb-4">Reply</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+</div>
+
+{% endfor %}
+
+<br/>
+<form class="form container" method='POST'>
+{% csrf_token %}
+
+{{ comment_form|crispy }}
+
+<button type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
+</form>

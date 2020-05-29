@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700 &display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital, wght@0, 400;0, 700;1, 400 &display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+a.navbar-brand,
+.card-title,
+.title {
+    font-family: 'Josefin Sans';
+    font-weight: 700;
+}
+
+a.nav-link {
+    font-family: 'Josefin Sans';
+    font-weight: 600;
+}
+
+a.card-title {
+    text-decoration: none;
+}
+
+li.nav-item,
+li.foot-item {
+    display: inline;
+    margin-right: 1rem;
+}
+
+p.card-text {
+    font-family: Lato;
+    font-style: italic;
+}
+
+.text-muted,
+.card-header,
+.orlogin,
+.author {
+    font-family: Lato;
+    font-weight: 700;
+}
+
+button {
+    font-family: Lato;
+    font-weight: 400;
+}
+
+b.author {
+    font-family: 'Source Sans Pro';
+    font-variant: small-caps;
+}
+
+.date,
+.like_count {
+    font-family: Lato;
+    font-weight: 700;
+}
+
+p.description {
+    font-family: Pacifico;
+}
+
+img {
+    max-width: 100%;
+}
+
+img.profile_picture {
+    float: left;
+}
+
+.username {
+    font-family: 'Josefin Sans';
+    font-size: large;
+}
+
+.manage {
+    font-family: 'Source Sans Pro';
+    font-size: medium;
+}
+
+.form-container {
+    max-width: 50rem;
+}
+
+@media(max-width:300px) {
+
+    .photo {
+        position: relative;
+    }
+}
+
+.photo {
+    float: right;
+    position: relative;
+    top: -10rem;
+}
+
+.fix {
+    clear: left;
+}
+
+.comment-pic {
+    height: 5rem;
+    width: 5rem;
+}
+
+.avatar {
+    float: left;
+    margin-right: 1rem;
+}
+
+.content {
+    position: relative;
+    top: 1em;
+}
+
+.comment-username {
+    font-family: 'Josefin Sans';
+    font-size: medium;
+}
+
+.text {
+    float: left;
+    font-family: 'Source Sans Pro';
+}
+
+.options {
+    font-family: Lato;
+    font-size: small;
+    font-weight: 700;
+    margin: 1rem 0 3rem 6rem;
+}
+
+@media(max-width:600px) {
+
+    .options {
+        font-family: Lato;
+        font-size: small;
+        font-weight: 700;
+        margin: 3rem 0 3rem 1px;
+    }
+}
+
+.replies {
+    position: relative;
+    left: 6rem;
+    margin-bottom: 2rem;
+}
+
+button [name=post_id] {
+    margin-top: 3rem;
+    float: right;
+}
+
+a.page-link {
+    margin: auto;
+}

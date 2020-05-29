@@ -1,0 +1,24 @@
+<!-- Like Section to load the section in ajax way -->
+
+<form action="{% url 'like' post.id post.slug %}" method="POST">
+    {% csrf_token %}
+
+      {% if is_liked %}
+          <button type="submit" id="like" name="post_id" value="{{ post.id }}" class="btn btn-link">
+            <span style="color: Tomato">
+              <i class="fas fa-heart fa-1x"></i>
+            </span>
+          </button>
+      {% else %}
+          <button type="submit" id="like" name="post_id" value="{{ post.id }}" class="btn btn-link">
+            <span style="color: Tomato">
+              <i class="far fa-heart fa-1x"></i>
+            </span>
+          </button>
+      {% endif %}
+
+
+    <span class="like_count">
+        {{ likes }} Like{{ likes|pluralize }}
+    </span>
+</form>

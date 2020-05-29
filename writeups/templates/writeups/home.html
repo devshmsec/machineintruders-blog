@@ -1,0 +1,137 @@
+{% extends "writeups/layout.html" %}
+
+{% block content %}
+
+    <p>
+        <h1>Authors</h1>
+    </p>
+
+    <div class="jumbotron">
+
+        <h1 class="display-5 fix">Vinay Verma</h1>
+        <p class="lead fix">@budheswarbaghel</p>
+
+        <p class="fix">
+
+            <a href="https://twitter.com/budheswarbaghel">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-twitter"></i>
+                </button>
+            </a>
+
+            <a href="https://www.instagram.com/budheswarbaghel/">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-instagram"></i>
+                </button>
+            </a>
+
+            <a href="https://gitlab.com/budheswarbaghel">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-gitlab"></i>
+                </button>
+            </a>
+
+            <a href="https://www.linkedin.com/in/vinay-verma-308745151/">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-linkedin"></i>
+                </button>
+            </a>
+
+            <a href="https://www.youtube.com/channel/UCAP3a4mikXidoWvDHTbI7HA/">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-youtube"></i>
+                </button>
+            </a>
+
+            <a href="https://www.twitch.tv/m4c1n31ntrud3rs">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-twitch"></i>
+                </button>
+            </a>
+
+            <a href="https://www.hackerrank.com/m4ch1n31ntrud3r">
+                <button type="button" class="btn btn-link disabled">
+                    <i class="fab fa-hackerrank"></i>
+                </button>
+            </a>
+
+        </p>
+
+        <!--<img class="photo mb-3" src="/media/photo.jpeg">-->
+
+        <p class="lead fix">
+
+            Hi there, I am a nerd guy who loves everything in between Internet and Security. 
+            I reach out to people and teach about CyberSecurity.
+            I like to play with electronics in my spare time so that I can automate my lifestyle. 
+
+        </p>
+
+        <hr class="my-4">
+
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">
+                Resume &nbsp;
+                <svg class="bi bi-download" width="1em" height="1em" viewbox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 01.5.5V12a1 1 0 001 1h12a1 1 0 001-1V8.5a.5.5 0 011 0V12a2 2 0 01-2 2H2a2 2 0 01-2-2V8.5A.5.5 0 01.5 8z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 01.707 0L8 9.793 10.293 7.5a.5.5 0 11.707.707l-2.646 2.647a.5.5 0 01-.708 0L5 8.207A.5.5 0 015 7.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 01.5.5v8a.5.5 0 01-1 0v-8A.5.5 0 018 1z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+        </p>
+    </div>
+
+    <hr class="my-4">
+
+    <p>
+        <h1>Blogs</h1>
+    </p>
+
+    <div class="card-deck card-column">     
+
+        {% for post in posts %}
+     
+        <div class="card border-secondary">
+            <img class="card-img-top img-fluid" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+            <div class="card-body">
+                <a href="{% url 'detail' post.id post.slug %}">
+                    <h5 class="card-title">{{ post.id }} :: {{ post.title }}</h5>
+                </a>
+                <p class="card-text">{{ post.description }}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ post.posted_on|date:"F d, Y" }}</small>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <hr class="my-4">
+
+    <p>
+        <h1>Projects</h1>
+    </p>
+
+    <div class="row">
+
+        {% for post in posts %}
+        
+        <div class="card border-secondary mb-3 ml-3" style="max-width: 22.3rem;">
+            <div class="card-header">{{ post.posted_on }}</div>
+            <div class="card-body">
+                <a href="{% url 'about' %}">
+                <h4 class="card-title">{{ post.title }}</h4>
+                </a>
+                <p class="card-text">{{ post.description }}</p>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,220 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <title>Machine Intruders</title>
+        <meta charset="UTF-8"/>
+        <meta
+        name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+
+        <!-- CSS stylesheet from bootswatch solarized theme -->
+        <link
+        rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/solar/bootstrap.min.css"/>
+
+        <!-- FontAwesome Stylesheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+        <!-- Highlight js stylesheet -->
+        <link rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css"/>
+
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="{% static 'writeups/style.css' %}"/>
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div
+                class="container">
+
+                <!-- Brand Name -->
+                <a class="navbar-brand" href="{% url 'home' %}">MachineIntruders</a>
+
+                <button
+                    class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <!-- Comment Out <span class="navbar-toggler-icon"></span> -->
+                    <svg class="bi bi-list" width="1em" height="1em" viewbox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto">
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'home' %}">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blogs' %}">Blogs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Projects</a>
+                        </li>
+
+                        {% if user.is_authenticated %}
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" 
+                                    data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{ user.username }}
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'profile' %}">
+                                        <svg class="bi bi-person-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                                        </svg> &nbsp; Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <svg class="bi bi-gear" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 014.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 01-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 011.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 012.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 012.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 011.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 01-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 018.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 001.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 00.52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 00-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 00-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 00-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 00-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 00.52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 001.255-.52l.094-.319z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 100 4.492 2.246 2.246 0 000-4.492zM4.754 8a3.246 3.246 0 116.492 0 3.246 3.246 0 01-6.492 0z" clip-rule="evenodd"/>
+                                        </svg> &nbsp; Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <svg class="bi bi-archive" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M5.5 7.5A.5.5 0 016 7h4a.5.5 0 010 1H6a.5.5 0 01-.5-.5zM15 2H1v2h14V2zM1 1a1 1 0 00-1 1v2a1 1 0 001 1h14a1 1 0 001-1V2a1 1 0 00-1-1H1z" clip-rule="evenodd"/>
+                                        </svg> &nbsp; Archive
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'account_logout' %}">
+                                        
+                                        <svg class="bi bi-box-arrow-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4.354 11.354a.5.5 0 000-.708L1.707 8l2.647-2.646a.5.5 0 10-.708-.708l-3 3a.5.5 0 000 .708l3 3a.5.5 0 00.708 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M11.5 8a.5.5 0 00-.5-.5H2a.5.5 0 000 1h9a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M14 13.5a1.5 1.5 0 001.5-1.5V4A1.5 1.5 0 0014 2.5H7A1.5 1.5 0 005.5 4v1.5a.5.5 0 001 0V4a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v8a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-1.5a.5.5 0 00-1 0V12A1.5 1.5 0 007 13.5h7z" clip-rule="evenodd"/>
+                                        </svg> &nbsp; Logout
+                                    </a>
+                                </div>
+                            </li>
+
+                        {% else %}
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" 
+                                    data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Accounts
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'account_login' %}">
+                                        <svg class="bi bi-box-arrow-in-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.854 11.354a.5.5 0 000-.708L5.207 8l2.647-2.646a.5.5 0 10-.708-.708l-3 3a.5.5 0 000 .708l3 3a.5.5 0 00.708 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 00-.5-.5h-9a.5.5 0 000 1h9A.5.5 0 0015 8z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M2.5 14.5A1.5 1.5 0 011 13V3a1.5 1.5 0 011.5-1.5h8A1.5 1.5 0 0112 3v1.5a.5.5 0 01-1 0V3a.5.5 0 00-.5-.5h-8A.5.5 0 002 3v10a.5.5 0 00.5.5h8a.5.5 0 00.5-.5v-1.5a.5.5 0 011 0V13a1.5 1.5 0 01-1.5 1.5h-8z" clip-rule="evenodd"/>
+                                        </svg> &nbsp; Login
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'account_signup' %}">
+                                        <svg class="bi bi-box-arrow-in-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8.146 11.354a.5.5 0 010-.708L10.793 8 8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 011 8z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M13.5 14.5A1.5 1.5 0 0015 13V3a1.5 1.5 0 00-1.5-1.5h-8A1.5 1.5 0 004 3v1.5a.5.5 0 001 0V3a.5.5 0 01.5-.5h8a.5.5 0 01.5.5v10a.5.5 0 01-.5.5h-8A.5.5 0 015 13v-1.5a.5.5 0 00-1 0V13a1.5 1.5 0 001.5 1.5h8z" clip-rule="evenodd"/>
+                                        </svg> &nbsp; Register
+                                    </a>
+                                </div>
+                            </li>
+
+                        {% endif %}
+
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container"> 
+        
+            {% if messages %}
+                {% for message in messages %}
+
+                <div class="mt-3 alert alert-dismissible alert-{{ message.tags }}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Message : </strong> {{ message }}
+                </div>
+
+                {% endfor %}
+            {% endif %}
+        
+            {% block content %}{% endblock content %}
+
+            <br/>
+            <hr class="my-4">
+
+            <footer  class="container" id="footer">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <ul class="list-unstyled">
+
+                            <li class="foot-item float-lg-right">
+                                <a href="#top">Back to top</a>
+                            </li>
+                            <li class="foot-item">
+                                <a href="https://www.instagram.com/budheswarbaghel/">Instagram</a>
+                            </li>
+                            <li class="foot-item">
+                                <a href="https://blog.bootswatch.com/rss/">RSS</a>
+                            </li>
+                            <li class="foot-item">
+                                <a href="https://twitter.com/bootswatch">Twitter</a>
+                            </li>
+                            <li class="foot-item">
+                                <a href="https://github.com/thomaspark/bootswatch/">GitHub</a>
+                            </li>
+                            <li class="foot-item">
+                                <a href="../help/#api">Disclaimer</a>
+                            </li>
+                            <li class="foot-item">
+                                <a href="../help/#donate">Donate</a>
+                            </li>
+
+                        </ul>
+
+                        <p>
+                            Made by
+                            <a href="https://thomaspark.co">Vinay Verma @budheswarbaghel</a>.<br/>
+
+                            Code released under the
+                            <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT License</a>.<br/>
+
+                            Based on
+                            <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from
+                            <a href="https://fontawesome.com/" rel="nofollow">Font Awesome and Bootstrap</a>. Web fonts from
+                            <a href="https://fonts.google.com/" rel="nofollow">Google</a>.
+                        </p>
+
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Including jquery, popper.js and bootstrap -->
+        <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.js"></script>
+
+        <script src="{% static 'writeups/index.js' %}"></script>
+    </body>
+</html>
